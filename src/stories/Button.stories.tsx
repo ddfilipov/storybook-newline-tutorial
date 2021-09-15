@@ -1,23 +1,36 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { Button } from './Button';
+import { Meta, Story } from '@storybook/react';
+import { Button, ButtonProps } from './Button';
 
 export default {
   title: 'Components/MyButton',
   component: Button
-} as ComponentMeta<typeof Button> // ComponentMeta automatically infers the props from Button
+} as Meta
 
-export const Primary: ComponentStory<typeof Button> = () => (
-  <Button primary label="Primary Button" />
-)
 
-export const Secondary: ComponentStory<typeof Button> = () => (
-  <Button label="Secondary Button" />
-)
+// Defina a template function
+const Template: Story<ButtonProps> = (args) => <Button {...args}/>
 
-export const Small: ComponentStory<typeof Button> = () => (
-  <Button label="small button" size="small" />
-)
 
-export const Large : ComponentStory<typeof Button> = () => (
-  <Button label="Large Button" size="large"/>
-)
+export const Primary =  Template.bind({}) 
+Primary.args = {
+  primary: true,
+  label: "Hello World",
+}
+
+export const Secondary = Template.bind({})
+Secondary.args = {
+  ...Primary.args,
+  primary: false,
+}
+
+export const Small = Template.bind({})
+Small.args = {
+  ...Primary.args,
+  size: "small",
+}
+
+export const Large = Template.bind({})
+Large.args = {
+  ...Primary.args,
+  size: "large",
+}
